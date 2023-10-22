@@ -4,8 +4,7 @@ namespace ContosoRetailDwExpander.Model;
 
 public class DimPromotionNullableKey
 {
-    [Column("PromotionKey")]
-    public int? PromotionKeyNullable { get; set; }
+    [Column("PromotionKey")] public int? PromotionKeyNullable { get; set; }
 
     public string? PromotionLabel { get; set; }
 
@@ -28,7 +27,4 @@ public class DimPromotionNullableKey
     public int? MaxQuantity { get; set; }
 
     public string? simple_string_nullable { get; set; } = null;
-    // public virtual ICollection<FactOnlineSale> FactOnlineSales { get; set; } = new List<FactOnlineSale>();
-    //
-    // public virtual ICollection<FactSale> FactSales { get; set; } = new List<FactSale>();
 }

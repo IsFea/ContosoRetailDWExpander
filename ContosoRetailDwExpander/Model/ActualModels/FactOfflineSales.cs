@@ -2,8 +2,9 @@
 
 namespace ContosoRetailDwExpander.Model;
 
-public class FactOnlineSale
+public class FactOfflineSale
 {
+    [Column("OfflineSalesKey")]
     public int OnlineSalesKey { get; set; }
 
     public DateTime DateKey { get; set; }
@@ -44,15 +45,21 @@ public class FactOnlineSale
 
     public string? simple_string_nullable { get; set; } = null;
 
-    // public virtual DimCurrency CurrencyKeyNavigation { get; set; } = null!;
-    //
-    // public virtual DimCustomer CustomerKeyNavigation { get; set; } = null!;
-    //
-    // public virtual DimDate DateKeyNavigation { get; set; } = null!;
-    //
-    // public virtual DimProduct ProductKeyNavigation { get; set; } = null!;
-    //
-    // public virtual DimPromotion PromotionKeyNavigation { get; set; } = null!;
-    //
-    // public virtual DimStore StoreKeyNavigation { get; set; } = null!;
+    [CsvIgnore]
+    public virtual DimCurrency CurrencyKeyNavigation { get; set; } = null!;
+    
+    [CsvIgnore]
+    public virtual DimCustomer CustomerKeyNavigation { get; set; } = null!;
+    
+    [CsvIgnore]
+    public virtual DimDate DateKeyNavigation { get; set; } = null!;
+    
+    [CsvIgnore]
+    public virtual DimProduct ProductKeyNavigation { get; set; } = null!;
+    
+    [CsvIgnore]
+    public virtual DimPromotion PromotionKeyNavigation { get; set; } = null!;
+    
+    [CsvIgnore]
+    public virtual DimStore StoreKeyNavigation { get; set; } = null!;
 }

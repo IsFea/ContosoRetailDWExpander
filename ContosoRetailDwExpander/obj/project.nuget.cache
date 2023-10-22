@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "4qF+o21WGf9cE2uRCruNIqgZZTaPaofmhchbZIPDfDdIPePJi30mb8aRzYZd6UE5NT3uBOylNi4FeIfS5jR8Jw==",
+  "dgSpecHash": "/QtabCxigU6aGZR47wHqRQASvWcxHlTiBDErcXjomSy776REGCE6u9+uYwY5FL8ZWe3NHcoq9aKxnUmcF6MCSg==",
   "success": true,
   "projectFilePath": "Q:\\Development\\Visiology\\ContosoRetailDwExpander\\ContosoRetailDwExpander\\ContosoRetailDwExpander.csproj",
   "expectedPackageFiles": [
@@ -121,6 +121,8 @@
     "C:\\Users\\koval\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\koval\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\koval\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\koval\\.nuget\\packages\\npgsql\\7.0.6\\npgsql.7.0.6.nupkg.sha512",
+    "C:\\Users\\koval\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.11\\npgsql.entityframeworkcore.postgresql.7.0.11.nupkg.sha512",
     "C:\\Users\\koval\\.nuget\\packages\\nuget.common\\6.6.1\\nuget.common.6.6.1.nupkg.sha512",
     "C:\\Users\\koval\\.nuget\\packages\\nuget.configuration\\6.6.1\\nuget.configuration.6.6.1.nupkg.sha512",
     "C:\\Users\\koval\\.nuget\\packages\\nuget.dependencyresolver.core\\6.6.1\\nuget.dependencyresolver.core.6.6.1.nupkg.sha512",

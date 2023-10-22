@@ -256,3 +256,5 @@ Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Deb
 Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
 Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll
 Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Debug\net7.0\Dapper.dll
+Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Debug\net7.0\Npgsql.dll
+Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

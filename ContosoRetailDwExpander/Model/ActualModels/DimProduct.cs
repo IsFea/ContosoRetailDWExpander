@@ -55,10 +55,12 @@ public class DimProduct
     public DateTime? StopSaleDate { get; set; }
 
     public string? Status { get; set; }
-
-    // public string? ImageUrl { get; set; }
-    //
-    // public string? ProductUrl { get; set; }
+    
+    [CsvIgnore]
+    public virtual ICollection<FactOnlineSale> FactOnlineSales { get; set; } = new List<FactOnlineSale>();
+    
+    [CsvIgnore]
+    public virtual ICollection<FactOfflineSale> FactOfflineSales { get; set; } = new List<FactOfflineSale>();
 
     //Новые колонки
 

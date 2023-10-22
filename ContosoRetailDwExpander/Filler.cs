@@ -25,172 +25,183 @@ public static partial class Filler
         var dimCustomersCount = dimCustomers.Count();
         for (var i = 0; i < neededRowCount; i++)
         {
-            var OnlineSalesKey = i;
+            var onlineSalesKey = i;
 
-            var DateKey = dimDates[rand.Next(0, dimDatesCount - 1)].Datekey;
+            var dateKey = dimDates[rand.Next(0, dimDatesCount - 1)].Datekey;
 
-            var StoreKey = dimStores[rand.Next(0, dimStoresCount - 1)].StoreKey;
+            var storeKey = dimStores[rand.Next(0, dimStoresCount - 1)].StoreKey;
 
             var randProduct = dimProducts[rand.Next(0, dimProductsCount - 1)];
-            var ProductKey = randProduct.ProductKey;
+            var productKey = randProduct.ProductKey;
 
             var randPromotion = dimPromotions[rand.Next(0, dimPromotionsCount - 1)];
-            var PromotionKey = randPromotion.PromotionKey;
+            var promotionKey = randPromotion.PromotionKey;
 
-            var PromotionKeyNullable = randPromotion.PromotionKey == 1 ? null : randPromotion.PromotionKey;
+            var promotionKeyNullable = randPromotion.PromotionKey == 1 ? null : randPromotion.PromotionKey;
 
-            var CurrencyKey = "1";
+            var currencyKey = "1";
             
             var randDimcustomer = dimCustomers[rand.Next(0, dimCustomersCount - 1)];
-            var CustomerKey = randDimcustomer.CustomerKey;
+            var customerKey = randDimcustomer.CustomerKey;
 
-            var SalesOrderNumber = DateKey.ToString().Replace("-", "")[..8] + randDimcustomer.CustomerLabel;
+            var salesOrderNumber = dateKey.ToString().Replace(".", "")[..8] + randDimcustomer.CustomerLabel;
 
             // var SalesOrderLineNumber;
 
-            decimal? TotalCost = randProduct.UnitCost;
+            decimal? totalCost = randProduct.UnitCost;
 
-            var UnitCost = randProduct.UnitCost;
+            var unitCost = randProduct.UnitCost;
 
-            var UnitPrice = randProduct.UnitPrice;
+            var unitPrice = randProduct.UnitPrice;
 
 
-            var SalesQuantity = rand.Next(1, 10);
+            var salesQuantity = rand.Next(1, 10);
 
-            var SalesAmount = SalesQuantity * UnitPrice;
+            var salesAmount = salesQuantity * unitPrice;
 
-            var ReturnQuantity = 0;
+            var returnQuantity = 0;
 
-            var ReturnAmount = 0;
+            var returnAmount = 0;
 
-            var DiscountQuantity = rand.Next(0, 2);
+            var discountQuantity = rand.Next(0, 2);
 
-            var DiscountAmount = DiscountQuantity > 0 ? UnitPrice * (decimal)0.10 : 0;
+            var discountAmount = discountQuantity > 0 ? unitPrice * (decimal)0.10 : 0;
             
             factOfflineSales.Add(new FactOfflineSale()
             {
-                OnlineSalesKey = OnlineSalesKey,
-                CurrencyKey = CurrencyKey,
-                CustomerKey = CustomerKey,
-                SalesOrderNumber = SalesOrderNumber,
+                OnlineSalesKey = onlineSalesKey,
+                CurrencyKey = currencyKey,
+                CustomerKey = customerKey,
+                SalesOrderNumber = salesOrderNumber,
                 SalesOrderLineNumber = null,
-                SalesQuantity = SalesQuantity,
-                SalesAmount = SalesAmount.Value,
-                ReturnQuantity = ReturnQuantity,
-                DateKey = DateKey,
-                StoreKey = StoreKey,
-                DiscountAmount = DiscountAmount,
-                TotalCost = TotalCost.Value,
-                UnitCost = UnitCost,
-                UnitPrice = UnitPrice,
+                SalesQuantity = salesQuantity,
+                SalesAmount = salesAmount.Value,
+                ReturnQuantity = returnQuantity,
+                DateKey = dateKey,
+                StoreKey = storeKey,
+                DiscountAmount = discountAmount,
+                TotalCost = totalCost.Value,
+                UnitCost = unitCost,
+                UnitPrice = unitPrice,
                 simple_string_nullable = null,
-                DiscountQuantity = DiscountQuantity,
-                ProductKey = ProductKey,
-                PromotionKey = PromotionKey.Value,
-                PromotionKeyNullable = PromotionKeyNullable.Value,
-                ReturnAmount = ReturnAmount,
+                DiscountQuantity = discountQuantity,
+                ProductKey = productKey,
+                PromotionKey = promotionKey.Value,
+                PromotionKeyNullable = promotionKeyNullable.Value,
+                ReturnAmount = returnAmount,
             
             });
         }
     }
     
-    public static void FillFactOnlineSales(
+    public static void FillAndWriteToCsvFactOnlineSales(
         List<FactOnlineSale> factOnlineSales,
         List<DimDate> dimDates,
         List<DimCustomer> dimCustomers,
         List<DimStore> dimStores,
         List<DimPromotion> dimPromotions,
         List<DimProduct> dimProducts,
-        int startedCountCustomer)
+        int startedCountCustomer,
+        string pathToWrite)
     {
         var rand = new Random();
-        var onlineSalesKeyMax = factOnlineSales.Max(x => x.OnlineSalesKey);
+        var onlineSalesKeyMax = 0; //factOnlineSales.Max(x => x.OnlineSalesKey);
         var countRowInCurrent = factOnlineSales.Count();
         const int neededRowCount = 200000000;
         var diff = neededRowCount - countRowInCurrent;
 
-        var dimCustomerCount = dimCustomers.Count() - 1;
-        var newPositionOfCustomer = dimCustomerCount - startedCountCustomer - 1;
+        var dimCustomerCount = dimCustomers.Count();
+        var newPositionOfCustomer = 0; //dimCustomerCount - startedCountCustomer;
         var customerIterator = newPositionOfCustomer;
 
         var dimDatesCount = dimDates.Count();
         var dimStoresCount = dimStores.Count();
         var dimProductsCount = dimProducts.Count();
         var dimPromotionsCount = dimPromotions.Count();
-        // var dimCustomersCount = dimCustomers.Count();
+
+        var generetedFactOnlineSales = new List<FactOnlineSale>();
         for (var i = 0; i < diff; i++)
         {
-            var OnlineSalesKey = onlineSalesKeyMax + i;
+            var onlineSalesKey = onlineSalesKeyMax + i;
 
-            var DateKey = dimDates[rand.Next(0, dimDatesCount)].Datekey;
+            var dateKey = dimDates[rand.Next(0, dimDatesCount)].Datekey;
 
-            var StoreKey = dimStores[rand.Next(0, dimStoresCount)].StoreKey;
+            var storeKey = dimStores[rand.Next(0, dimStoresCount)].StoreKey;
 
             var randProduct = dimProducts[rand.Next(0, dimProductsCount)];
-            var ProductKey = randProduct.ProductKey;
+            var productKey = randProduct.ProductKey;
 
             var randPromotion = dimPromotions[rand.Next(0, dimPromotionsCount)];
-            var PromotionKey = randPromotion.PromotionKey;
+            var promotionKey = randPromotion.PromotionKey;
 
-            var PromotionKeyNullable = randPromotion.PromotionKey == 1 ? null : randPromotion.PromotionKey;
+            var promotionKeyNullable = randPromotion.PromotionKey == 1 ? null : promotionKey;
 
-            var CurrencyKey = "1";
+            var currencyKey = "1";
 
             if (customerIterator >= dimCustomerCount)
                 customerIterator = newPositionOfCustomer;
 
             var randDimcustomer = dimCustomers[customerIterator];
-            var CustomerKey = randDimcustomer.CustomerKey;
+            var customerKey = randDimcustomer.CustomerKey;
             customerIterator++;
 
-            var SalesOrderNumber = DateKey.ToString().Replace("-", "")[..8] + randDimcustomer.CustomerLabel;
+            var salesOrderNumber = dateKey.ToString().Replace("-", "")[..8] + randDimcustomer.CustomerLabel;
 
             // var SalesOrderLineNumber;
 
-            decimal? TotalCost = randProduct.UnitCost;
+            decimal? totalCost = randProduct.UnitCost;
 
-            var UnitCost = randProduct.UnitCost;
+            var unitCost = randProduct.UnitCost;
 
-            var UnitPrice = randProduct.UnitPrice;
+            var unitPrice = randProduct.UnitPrice;
 
 
-            var SalesQuantity = rand.Next(1, 10);
+            var salesQuantity = rand.Next(1, 10);
 
-            var SalesAmount = SalesQuantity * UnitPrice;
+            var salesAmount = salesQuantity * unitPrice;
 
-            var ReturnQuantity = 0;
+            var returnQuantity = 0;
 
-            var ReturnAmount = 0;
+            var returnAmount = 0;
 
-            var DiscountQuantity = rand.Next(0, 2);
+            var discountQuantity = rand.Next(0, 2);
 
-            var DiscountAmount = DiscountQuantity > 0 ? UnitPrice * (decimal?)0.10 : 0;
+            var discountAmount = discountQuantity > 0 ? unitPrice * (decimal?)0.10 : 0;
             
-            factOnlineSales.Add(new FactOnlineSale
+            generetedFactOnlineSales.Add(new FactOnlineSale
             {
-                OnlineSalesKey = OnlineSalesKey,
-                CurrencyKey = CurrencyKey,
-                CustomerKey = CustomerKey,
-                SalesOrderNumber = SalesOrderNumber,
+                OnlineSalesKey = onlineSalesKey,
+                CurrencyKey = currencyKey,
+                CustomerKey = customerKey,
+                SalesOrderNumber = salesOrderNumber,
                 SalesOrderLineNumber = null,
-                SalesQuantity = SalesQuantity,
-                SalesAmount = SalesAmount.Value,
-                ReturnQuantity = ReturnQuantity,
-                DateKey = DateKey,
-                StoreKey = StoreKey,
-                DiscountAmount = DiscountAmount,
-                TotalCost = TotalCost.Value,
-                UnitCost = UnitCost,
-                UnitPrice = UnitPrice,
+                SalesQuantity = salesQuantity,
+                SalesAmount = salesAmount.Value,
+                ReturnQuantity = returnQuantity,
+                DateKey = dateKey,
+                StoreKey = storeKey,
+                DiscountAmount = discountAmount,
+                TotalCost = totalCost.Value,
+                UnitCost = unitCost,
+                UnitPrice = unitPrice,
                 simple_string_nullable = null,
-                DiscountQuantity = DiscountQuantity,
-                ProductKey = ProductKey,
-                PromotionKey = PromotionKey.Value,
-                PromotionKeyNullable = PromotionKeyNullable,
-                ReturnAmount = ReturnAmount,
+                DiscountQuantity = discountQuantity,
+                ProductKey = productKey,
+                PromotionKey = promotionKey.Value,
+                PromotionKeyNullable = promotionKeyNullable,
+                ReturnAmount = returnAmount,
             
             });
+
+            if (i % 5000000 == 0 && i != 0)
+            {
+                CsvUtils.CreateCSV(generetedFactOnlineSales, pathToWrite);
+                generetedFactOnlineSales.Clear();
+            }
         }
+        //Дописываем остатки
+        if (generetedFactOnlineSales.Any())
+            CsvUtils.CreateCSV(generetedFactOnlineSales, pathToWrite);
     }
 
     public static void FillDimPromotion(List<DimPromotion> dimPromotions)
@@ -207,7 +218,7 @@ public static partial class Filler
         }
     }
 
-    public static void FillDimCustomer(List<DimCustomer> dimCustomers)
+    public static void FillDimCustomer(List<DimCustomer> dimCustomers, string pathToFatString)
     {
         var countRowInCurrent = dimCustomers.Count();
         const int neededRowCount = 5000000;
@@ -298,13 +309,15 @@ public static partial class Filler
             dimCustomers.Add(dimCustomerToInsert);
         }
 
-        var subjects = CsvUtils.LoadOneDimensionalCsv("Q://fat_string.csv");
+        var subjects = CsvUtils.LoadOneDimensionalCsv(pathToFatString);
 
         for (var i = 0; i < dimCustomers.Count(); i++)
         {
             dimCustomers[i].Inn = GenerateInn();
             dimCustomers[i].Fat_string = subjects[i];
         }
+        subjects.Clear();
+        GC.Collect();
     }
 
     public static void FillDimProduct(IEnumerable<DimProduct> dimProducts)

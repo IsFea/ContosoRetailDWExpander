@@ -43,19 +43,10 @@ public class DimStore
     public DateTime? LastRemodelDate { get; set; }
     
     public string? simple_string_nullable { get; set; } = null;
-
-    // public virtual ICollection<DimMachine> DimMachines { get; set; } = new List<DimMachine>();
-    //
-    // public virtual ICollection<FactInventory> FactInventories { get; set; } = new List<FactInventory>();
-    //
-    // public virtual ICollection<FactItsla> FactItslas { get; set; } = new List<FactItsla>();
-    //
+    
+    [CsvIgnore]
     public virtual ICollection<FactOnlineSale> FactOnlineSales { get; set; } = new List<FactOnlineSale>();
+    
+    [CsvIgnore]
     public virtual ICollection<FactOfflineSale> FactOfflineSales { get; set; } = new List<FactOfflineSale>();
-    //
-    // public virtual ICollection<FactSale> FactSales { get; set; } = new List<FactSale>();
-    //
-    // public virtual ICollection<FactSalesQuotum> FactSalesQuota { get; set; } = new List<FactSalesQuotum>();
-
-    // public virtual DimGeography GeographyKeyNavigation { get; set; } = null!;
 }

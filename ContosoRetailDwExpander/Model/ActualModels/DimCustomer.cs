@@ -54,8 +54,12 @@ public class DimCustomer
 
     public string? CompanyName { get; set; }
 
-    // public virtual ICollection<FactOnlineSale> FactOnlineSales { get; set; } = new List<FactOnlineSale>();
-    //
+    [CsvIgnore]
+    public virtual ICollection<FactOnlineSale> FactOnlineSales { get; set; } = new List<FactOnlineSale>();
+    
+    [CsvIgnore]
+    public virtual ICollection<FactOfflineSale> FactOfflineSales { get; set; } = new List<FactOfflineSale>();
+    
     // public virtual DimGeography GeographyKeyNavigation { get; set; } = null!;
     
     //Новые колонки
