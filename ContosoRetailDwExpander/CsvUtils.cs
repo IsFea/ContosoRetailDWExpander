@@ -40,6 +40,7 @@ public static class CsvUtils
             {
                 sw.Write("¿");
             }
+
             sw.Write(prop.Name);
             hasPreviousProperty = true;
         }
@@ -59,11 +60,17 @@ public static class CsvUtils
 
         foreach (var item in list)
         {
+            var hasPreviousProperty = false;
             for (var i = 0; i < properties.Length - 1; i++)
             {
                 var prop = properties[i];
-                if (!HasCsvIgnoreAttribute(prop))
-                    sb.Append(GetValueByType(prop.GetValue(item))).Append("¿");
+                if (HasCsvIgnoreAttribute(prop)) continue;
+                if (hasPreviousProperty)
+                {
+                    sb.Append("¿");
+                }
+                sb.Append(GetValueByType(prop.GetValue(item)));
+                hasPreviousProperty = true;
             }
 
             var lastProp = properties[^1];
@@ -72,6 +79,7 @@ public static class CsvUtils
                 GetValueByType(lastProp.PropertyType);
                 sb.Append(GetValueByType(lastProp.GetValue(item)));
             }
+
             sb.Append(sw.NewLine);
 
             iterator++;
