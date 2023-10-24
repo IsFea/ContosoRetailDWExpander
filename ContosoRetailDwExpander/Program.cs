@@ -38,13 +38,12 @@ internal static class Program
         FillDimCustomer(dimCustomer, _pathToFatString);
         FillDimProduct(dimProduct);
         FillDimDate(dimDate);
-        FillDimPromotion(dimPromotion);
-        FillFactOfflineSales(factOfflineSales, dimDate, dimCustomer, dimStore, dimPromotion, dimProduct);
+        FillFactOfflineSales(factOfflineSales, dimDate, dimCustomer, dimStore, dimPromotion,dimPromotionNullableKey, dimProduct);
         
         CsvUtils.CreateCSV(factOfflineSales, _basePath + "factOfflineSales.csv");
         factOfflineSales.Clear();
         
-        FillAndWriteToCsvFactOnlineSales(factOnlineSales, dimDate, dimCustomer, dimStore, dimPromotion, dimProduct,
+        FillAndWriteToCsvFactOnlineSales(factOnlineSales, dimDate, dimCustomer, dimStore, dimPromotion,dimPromotionNullableKey, dimProduct,
             dimCustomerCount, _basePath + "factOnlineSales.csv");
 
         CsvUtils.CreateCSV(dimProduct, _basePath + "dimProduct.csv");

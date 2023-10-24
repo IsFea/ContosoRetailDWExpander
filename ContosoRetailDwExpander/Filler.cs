@@ -13,6 +13,7 @@ public static partial class Filler
         List<DimCustomer> dimCustomers,
         List<DimStore> dimStores,
         List<DimPromotion> dimPromotions,
+        List<DimPromotionNullableKey> dimPromotionNullables,
         List<DimProduct> dimProducts)
     {
         var rand = new Random();
@@ -22,6 +23,7 @@ public static partial class Filler
         var dimStoresCount = dimStores.Count();
         var dimProductsCount = dimProducts.Count();
         var dimPromotionsCount = dimPromotions.Count();
+        var dimPromotionNullablesCount = dimPromotionNullables.Count();
         var dimCustomersCount = dimCustomers.Count();
         for (var i = 0; i < neededRowCount; i++)
         {
@@ -36,8 +38,11 @@ public static partial class Filler
 
             var randPromotion = dimPromotions[rand.Next(0, dimPromotionsCount - 1)];
             var promotionKey = randPromotion.PromotionKey;
+            
+            var randPromotionNullable = dimPromotionNullables[rand.Next(0, dimPromotionNullablesCount - 1)];
+            var promotionKeyNullableForInsert = randPromotionNullable.PromotionKeyNullable;
 
-            var promotionKeyNullable = randPromotion.PromotionKey == 1 ? null : randPromotion.PromotionKey;
+            var promotionKeyNullable = promotionKeyNullableForInsert == 1 ? null : promotionKeyNullableForInsert;
 
             var currencyKey = "1";
             
@@ -100,6 +105,7 @@ public static partial class Filler
         List<DimCustomer> dimCustomers,
         List<DimStore> dimStores,
         List<DimPromotion> dimPromotions,
+        List<DimPromotionNullableKey> dimPromotionNullables,
         List<DimProduct> dimProducts,
         int startedCountCustomer,
         string pathToWrite)
