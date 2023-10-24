@@ -73,7 +73,7 @@ public static partial class Filler
                 CurrencyKey = currencyKey,
                 CustomerKey = customerKey,
                 SalesOrderNumber = salesOrderNumber,
-                SalesOrderLineNumber = null,
+                SalesOrderLineNumber = rand.Next(1, 4874),
                 SalesQuantity = salesQuantity,
                 SalesAmount = salesAmount.Value,
                 ReturnQuantity = returnQuantity,
