@@ -4,7 +4,7 @@ namespace ContosoRetailDwExpander.Model;
 
 public class DimPromotionNullableKey
 {
-    [Column("PromotionKey")] public int? PromotionKeyNullable { get; set; }
+    public int? PromotionKeyNullable { get; set; }
 
     public string? PromotionLabel { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text.RegularExpressions;
 using ContosoRetailDwExpander.Model;
 
 namespace ContosoRetailDwExpander.Extensions;
@@ -68,6 +69,19 @@ public static class DimDateExtensions
         dimDate.CalendarWeekNumberOfMonth = GetWeekNumber(date);
         dimDate.CalendarWeekNumberOfYear = week;
         dimDate.CalendarDayNumber = date.Day;
+        dimDate.CalendarQuarterNumber = TryExtractQuarterNumber(dimDate.CalendarQuarterLabel);
+    }
+
+    private static int? TryExtractQuarterNumber(string inputString)
+    {
+        var pattern = @"Q(\d+)";
+        var regex = new Regex(pattern);
+        
+        var match = regex.Match(inputString);
+
+        if (!match.Success) return null;
+        var number = Int32.Parse(match.Groups[1].Value);
+        return number;
     }
 
     private static int GetWeekNumber(DateTime date)

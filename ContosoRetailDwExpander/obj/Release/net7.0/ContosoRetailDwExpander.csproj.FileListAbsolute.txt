@@ -258,3 +258,4 @@ Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\obj\Rel
 Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\obj\Release\net7.0\ref\ContosoRetailDwExpander.dll
 Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Release\net7.0\Npgsql.dll
 Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Release\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Release\net7.0\ContosoRetailDwExpander.dll.config

@@ -9,9 +9,7 @@ public class DimProduct
     public string? ProductName { get; set; }
 
     public string? ProductDescription { get; set; }
-
-    // public int? ProductSubcategoryKey { get; set; }
-
+    
     public string? Manufacturer { get; set; }
 
     public string? BrandName { get; set; }

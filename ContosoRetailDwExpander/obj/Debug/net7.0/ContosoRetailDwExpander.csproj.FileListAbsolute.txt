@@ -258,3 +258,4 @@ Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Deb
 Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Debug\net7.0\Dapper.dll
 Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Debug\net7.0\Npgsql.dll
 Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+Q:\Development\Visiology\ContosoRetailDwExpander\ContosoRetailDwExpander\bin\Debug\net7.0\ContosoRetailDwExpander.dll.config

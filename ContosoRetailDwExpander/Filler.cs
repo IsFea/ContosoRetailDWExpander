@@ -120,6 +120,8 @@ public static partial class Filler
         var dimPromotionsCount = dimPromotions.Count();
 
         var generetedFactOnlineSales = new List<FactOnlineSale>();
+        var firstBatch = true;
+        
         for (var i = 0; i < diff; i++)
         {
             var onlineSalesKey = onlineSalesKeyMax + i;
@@ -147,7 +149,7 @@ public static partial class Filler
 
             var salesOrderNumber = dateKey.ToString().Replace("-", "")[..8] + randDimcustomer.CustomerLabel;
 
-            // var SalesOrderLineNumber;
+            var SalesOrderLineNumber = rand.Next(1, 4874);
 
             decimal? totalCost = randProduct.UnitCost;
 
@@ -174,7 +176,7 @@ public static partial class Filler
                 CurrencyKey = currencyKey,
                 CustomerKey = customerKey,
                 SalesOrderNumber = salesOrderNumber,
-                SalesOrderLineNumber = null,
+                SalesOrderLineNumber = SalesOrderLineNumber,
                 SalesQuantity = salesQuantity,
                 SalesAmount = salesAmount.Value,
                 ReturnQuantity = returnQuantity,
@@ -195,13 +197,14 @@ public static partial class Filler
 
             if (i % 5000000 == 0 && i != 0)
             {
-                CsvUtils.CreateCSV(generetedFactOnlineSales, pathToWrite);
+                CsvUtils.CreateCSV(generetedFactOnlineSales, pathToWrite, firstBatch);
                 generetedFactOnlineSales.Clear();
+                firstBatch = false;
             }
         }
         //Дописываем остатки
         if (generetedFactOnlineSales.Any())
-            CsvUtils.CreateCSV(generetedFactOnlineSales, pathToWrite);
+            CsvUtils.CreateCSV(generetedFactOnlineSales, pathToWrite, firstBatch);
     }
 
     public static void FillDimPromotion(List<DimPromotion> dimPromotions)
@@ -224,7 +227,7 @@ public static partial class Filler
         const int neededRowCount = 5000000;
         var diff = neededRowCount - countRowInCurrent;
 
-        var customerKeyMax = dimCustomers.Select(x => x.CustomerKey).Max();
+        var customerKeyMax = dimCustomers.Select(x => x.CustomerKey).Max() + 1;
         
         var random = new Random();
         

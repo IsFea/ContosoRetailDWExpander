@@ -5,11 +5,15 @@ using Dapper;
 
 static class MsSqlRepository
 {
-    static string connectionString = "Server=127.0.0.1,49170;User id=admin;Password=;Database=ContosoRetailDW;TrustServerCertificate=True;";
+    private static string _connectionString = "Server=127.0.0.1,49170;User id=admin;Password=;Database=ContosoRetailDW;TrustServerCertificate=True;";
 
+    public static void SetConnectionString(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
     public static List<DimProduct> PullDimProduct()
     {
-        using (IDbConnection db = new SqlConnection(connectionString))
+        using (IDbConnection db = new SqlConnection(_connectionString))
         {
             return db.Query<DimProduct>("SELECT * FROM DimProduct").ToList();
         }
@@ -17,7 +21,7 @@ static class MsSqlRepository
 
     public static List<DimCurrency> PullDimCurrency()
     {
-        using (IDbConnection db = new SqlConnection(connectionString))
+        using (IDbConnection db = new SqlConnection(_connectionString))
         {
             return db.Query<DimCurrency>("SELECT * FROM DimCurrency").ToList();
         }
@@ -25,7 +29,7 @@ static class MsSqlRepository
 
     public static List<DimCustomer> PullDimCustomer()
     {
-        using (IDbConnection db = new SqlConnection(connectionString))
+        using (IDbConnection db = new SqlConnection(_connectionString))
         {
             return db.Query<DimCustomer>("SELECT * FROM DimCustomer").ToList();
         }
@@ -33,7 +37,7 @@ static class MsSqlRepository
 
     public static List<FactOnlineSale> PullFactOnlineSales()
     {
-        using (IDbConnection db = new SqlConnection(connectionString))
+        using (IDbConnection db = new SqlConnection(_connectionString))
         {
             return db.Query<FactOnlineSale>("SELECT * FROM FactOnlineSales").ToList();
         }
@@ -41,7 +45,7 @@ static class MsSqlRepository
 
     public static List<DimStore> PullDimStore()
     {
-        using (IDbConnection db = new SqlConnection(connectionString))
+        using (IDbConnection db = new SqlConnection(_connectionString))
         {
             return db.Query<DimStore>("SELECT * FROM DimStore").ToList();
         }
@@ -49,7 +53,7 @@ static class MsSqlRepository
 
     public static List<DimPromotion> PullDimPromotion()
     {
-        using (IDbConnection db = new SqlConnection(connectionString))
+        using (IDbConnection db = new SqlConnection(_connectionString))
         {
             return db.Query<DimPromotion>("SELECT * FROM DimPromotion").ToList();
         }
@@ -57,7 +61,7 @@ static class MsSqlRepository
     
     public static List<DimPromotionNullableKey> PullDimPromotionNullableKey()
     {
-        using (IDbConnection db = new SqlConnection(connectionString))
+        using (IDbConnection db = new SqlConnection(_connectionString))
         {
             return db.Query<DimPromotionNullableKey>(@"select 
             PromotionKey as PromotionKeyNullable
@@ -77,7 +81,7 @@ static class MsSqlRepository
 
     public static List<DimDate> PullDimDate()
     {
-        using (IDbConnection db = new SqlConnection(connectionString))
+        using (IDbConnection db = new SqlConnection(_connectionString))
         {
             return db.Query<DimDate>("SELECT * FROM DimDate").ToList();
         }

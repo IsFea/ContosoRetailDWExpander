@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 using System.Text;
 using ContosoRetailDwExpander.Model;
-using Microsoft.Extensions.Primitives;
 
 namespace ContosoRetailDwExpander;
 
 public static class CsvUtils
 {
+    private const string Delemitter = "|";
     public static List<string> LoadOneDimensionalCsv(string filePath)
     {
         var subjects = new List<string>();
@@ -38,7 +38,7 @@ public static class CsvUtils
             if (HasCsvIgnoreAttribute(prop)) continue;
             if (hasPreviousProperty)
             {
-                sw.Write("¿");
+                sw.Write(Delemitter);
             }
 
             sw.Write(prop.Name);
@@ -67,7 +67,7 @@ public static class CsvUtils
                 if (HasCsvIgnoreAttribute(prop)) continue;
                 if (hasPreviousProperty)
                 {
-                    sb.Append("¿");
+                    sb.Append(Delemitter);
                 }
                 sb.Append(GetValueByType(prop.GetValue(item)));
                 hasPreviousProperty = true;
@@ -76,8 +76,7 @@ public static class CsvUtils
             var lastProp = properties[^1];
             if (!HasCsvIgnoreAttribute(lastProp))
             {
-                GetValueByType(lastProp.PropertyType);
-                sb.Append(GetValueByType(lastProp.GetValue(item)));
+                sb.Append(Delemitter).Append(GetValueByType(lastProp.GetValue(item)));
             }
 
             sb.Append(sw.NewLine);
@@ -100,9 +99,9 @@ public static class CsvUtils
                 float floatValue => floatValue.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 double doubleValue => doubleValue.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 decimal decimalValue => decimalValue.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                _ => value.ToString()
+                _ => value.ToString()?.Replace(Delemitter,"").Replace("'","").Replace("\"","").Trim()
             };
-        return "";
+        return "\\N";
     }
 
     private static bool HasCsvIgnoreAttribute(PropertyInfo property)
@@ -110,10 +109,11 @@ public static class CsvUtils
         return property.GetCustomAttribute(typeof(CsvIgnoreAttribute)) != null;
     }
 
-    public static void CreateCSV<T>(List<T> list, string filePath)
+    public static void CreateCSV<T>(List<T> list, string filePath, bool createHeader = true)
     {
         using var sw = new StreamWriter(filePath, true);
-        CreateHeader(list, sw);
+        if(createHeader)
+            CreateHeader(list, sw);
         CreateRows(list, sw);
     }
 }
