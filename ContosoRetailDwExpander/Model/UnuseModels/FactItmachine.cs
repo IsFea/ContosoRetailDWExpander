@@ -18,7 +18,7 @@ public class FactItmachine
 
     public DateTime? UpdateDate { get; set; }
 
-    public virtual DimDate DatekeyNavigation { get; set; } = null!;
+    public virtual dimdate DatekeyNavigation { get; set; } = null!;
 
     public virtual DimMachine MachineKeyNavigation { get; set; } = null!;
 }

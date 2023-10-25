@@ -11,59 +11,59 @@ static class MsSqlRepository
     {
         _connectionString = connectionString;
     }
-    public static List<DimProduct> PullDimProduct()
+    public static List<dimproduct> PullDimProduct()
     {
         using (IDbConnection db = new SqlConnection(_connectionString))
         {
-            return db.Query<DimProduct>("SELECT * FROM DimProduct").ToList();
+            return db.Query<dimproduct>("SELECT * FROM DimProduct").ToList();
         }
     }
 
-    public static List<DimCurrency> PullDimCurrency()
+    public static List<dimcurrency> PullDimCurrency()
     {
         using (IDbConnection db = new SqlConnection(_connectionString))
         {
-            return db.Query<DimCurrency>("SELECT * FROM DimCurrency").ToList();
+            return db.Query<dimcurrency>("SELECT * FROM DimCurrency").ToList();
         }
     }
 
-    public static List<DimCustomer> PullDimCustomer()
+    public static List<dimcustomer> PullDimCustomer()
     {
         using (IDbConnection db = new SqlConnection(_connectionString))
         {
-            return db.Query<DimCustomer>("SELECT * FROM DimCustomer").ToList();
+            return db.Query<dimcustomer>("SELECT * FROM DimCustomer").ToList();
         }
     }
 
-    public static List<FactOnlineSale> PullFactOnlineSales()
+    public static List<factonlinesale> PullFactOnlineSales()
     {
         using (IDbConnection db = new SqlConnection(_connectionString))
         {
-            return db.Query<FactOnlineSale>("SELECT * FROM FactOnlineSales").ToList();
+            return db.Query<factonlinesale>("SELECT * FROM FactOnlineSales").ToList();
         }
     }
 
-    public static List<DimStore> PullDimStore()
+    public static List<dimstore> PullDimStore()
     {
         using (IDbConnection db = new SqlConnection(_connectionString))
         {
-            return db.Query<DimStore>("SELECT * FROM DimStore").ToList();
+            return db.Query<dimstore>("SELECT * FROM DimStore").ToList();
         }
     }
 
-    public static List<DimPromotion> PullDimPromotion()
+    public static List<dimpromotion> PullDimPromotion()
     {
         using (IDbConnection db = new SqlConnection(_connectionString))
         {
-            return db.Query<DimPromotion>("SELECT * FROM DimPromotion").ToList();
+            return db.Query<dimpromotion>("SELECT * FROM DimPromotion").ToList();
         }
     }
     
-    public static List<DimPromotionNullableKey> PullDimPromotionNullableKey()
+    public static List<dimpromotionnullablekey> PullDimPromotionNullableKey()
     {
         using (IDbConnection db = new SqlConnection(_connectionString))
         {
-            return db.Query<DimPromotionNullableKey>(@"select 
+            return db.Query<dimpromotionnullablekey>(@"select 
             PromotionKey as PromotionKeyNullable
                 ,PromotionLabel
                 ,PromotionName
@@ -79,11 +79,11 @@ static class MsSqlRepository
         }
     }
 
-    public static List<DimDate> PullDimDate()
+    public static List<dimdate> PullDimDate()
     {
         using (IDbConnection db = new SqlConnection(_connectionString))
         {
-            return db.Query<DimDate>("SELECT * FROM DimDate").ToList();
+            return db.Query<dimdate>("SELECT * FROM DimDate").ToList();
         }
     }
 }

@@ -24,11 +24,11 @@ public class FactItsla
 
     public DateTime? UpdateDate { get; set; }
 
-    public virtual DimDate DateKeyNavigation { get; set; } = null!;
+    public virtual dimdate DateKeyNavigation { get; set; } = null!;
 
     public virtual DimMachine MachineKeyNavigation { get; set; } = null!;
 
     public virtual DimOutage OutageKeyNavigation { get; set; } = null!;
 
-    public virtual DimStore StoreKeyNavigation { get; set; } = null!;
+    public virtual dimstore StoreKeyNavigation { get; set; } = null!;
 }

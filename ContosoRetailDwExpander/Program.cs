@@ -26,12 +26,12 @@ internal static class Program
         var dimProduct = MsSqlRepository.PullDimProduct();
         var dimCurrency = MsSqlRepository.PullDimCurrency();
         var dimCustomer = MsSqlRepository.PullDimCustomer();
-        var factOnlineSales = new List<FactOnlineSale>();
+        var factOnlineSales = new List<factonlinesale>();
         var dimStore = MsSqlRepository.PullDimStore();
         var dimPromotion = MsSqlRepository.PullDimPromotion();
         var dimPromotionNullableKey = MsSqlRepository.PullDimPromotionNullableKey();
         var dimDate = MsSqlRepository.PullDimDate();
-        var factOfflineSales = new List<FactOfflineSale>();
+        var factOfflineSales = new List<factofflinesale>();
 
         var dimCustomerCount = dimCustomer.Count();
 

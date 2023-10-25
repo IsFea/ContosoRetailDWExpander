@@ -34,11 +34,11 @@ public class FactInventory
 
     public DateTime? UpdateDate { get; set; }
 
-    public virtual DimCurrency CurrencyKeyNavigation { get; set; } = null!;
+    public virtual dimcurrency CurrencyKeyNavigation { get; set; } = null!;
 
-    public virtual DimDate DateKeyNavigation { get; set; } = null!;
+    public virtual dimdate DateKeyNavigation { get; set; } = null!;
 
-    public virtual DimProduct ProductKeyNavigation { get; set; } = null!;
+    public virtual dimproduct ProductKeyNavigation { get; set; } = null!;
 
-    public virtual DimStore StoreKeyNavigation { get; set; } = null!;
+    public virtual dimstore StoreKeyNavigation { get; set; } = null!;
 }

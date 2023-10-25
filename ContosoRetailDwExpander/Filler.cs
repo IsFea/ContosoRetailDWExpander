@@ -8,13 +8,13 @@ namespace ContosoRetailDwExpander;
 public static partial class Filler
 {
     public static void FillFactOfflineSales(
-        List<FactOfflineSale> factOfflineSales,
-        List<DimDate> dimDates,
-        List<DimCustomer> dimCustomers,
-        List<DimStore> dimStores,
-        List<DimPromotion> dimPromotions,
-        List<DimPromotionNullableKey> dimPromotionNullables,
-        List<DimProduct> dimProducts)
+        List<factofflinesale> factOfflineSales,
+        List<dimdate> dimDates,
+        List<dimcustomer> dimCustomers,
+        List<dimstore> dimStores,
+        List<dimpromotion> dimPromotions,
+        List<dimpromotionnullablekey> dimPromotionNullables,
+        List<dimproduct> dimProducts)
     {
         var rand = new Random();
         const int neededRowCount = 100000;
@@ -29,35 +29,35 @@ public static partial class Filler
         {
             var onlineSalesKey = i;
 
-            var dateKey = dimDates[rand.Next(0, dimDatesCount - 1)].Datekey;
+            var dateKey = dimDates[rand.Next(0, dimDatesCount - 1)].datekey;
 
-            var storeKey = dimStores[rand.Next(0, dimStoresCount - 1)].StoreKey;
+            var storeKey = dimStores[rand.Next(0, dimStoresCount - 1)].storekey;
 
             var randProduct = dimProducts[rand.Next(0, dimProductsCount - 1)];
-            var productKey = randProduct.ProductKey;
+            var productKey = randProduct.productkey;
 
             var randPromotion = dimPromotions[rand.Next(0, dimPromotionsCount - 1)];
-            var promotionKey = randPromotion.PromotionKey;
+            var promotionKey = randPromotion.promotionkey;
             
             var randPromotionNullable = dimPromotionNullables[rand.Next(0, dimPromotionNullablesCount - 1)];
-            var promotionKeyNullableForInsert = randPromotionNullable.PromotionKeyNullable;
+            var promotionKeyNullableForInsert = randPromotionNullable.promotionkeynullable;
 
             var promotionKeyNullable = promotionKeyNullableForInsert == 1 ? null : promotionKeyNullableForInsert;
 
             var currencyKey = "1";
             
             var randDimcustomer = dimCustomers[rand.Next(0, dimCustomersCount - 1)];
-            var customerKey = randDimcustomer.CustomerKey;
+            var customerKey = randDimcustomer.customerkey;
 
-            var salesOrderNumber = dateKey.ToString().Replace(".", "")[..8] + randDimcustomer.CustomerLabel;
+            var salesOrderNumber = dateKey.ToString().Replace(".", "")[..8] + randDimcustomer.customerlabel;
 
             // var SalesOrderLineNumber;
 
-            decimal? totalCost = randProduct.UnitCost;
+            decimal? totalCost = randProduct.unitcost;
 
-            var unitCost = randProduct.UnitCost;
+            var unitCost = randProduct.unitcost;
 
-            var unitPrice = randProduct.UnitPrice;
+            var unitPrice = randProduct.unitprice;
 
 
             var salesQuantity = rand.Next(1, 10);
@@ -72,41 +72,41 @@ public static partial class Filler
 
             var discountAmount = discountQuantity > 0 ? unitPrice * (decimal)0.10 : 0;
             
-            factOfflineSales.Add(new FactOfflineSale()
+            factOfflineSales.Add(new factofflinesale()
             {
-                OnlineSalesKey = onlineSalesKey,
-                CurrencyKey = currencyKey,
-                CustomerKey = customerKey,
-                SalesOrderNumber = salesOrderNumber,
-                SalesOrderLineNumber = rand.Next(1, 4874),
-                SalesQuantity = salesQuantity,
-                SalesAmount = salesAmount.Value,
-                ReturnQuantity = returnQuantity,
-                DateKey = dateKey,
-                StoreKey = storeKey,
-                DiscountAmount = discountAmount,
-                TotalCost = totalCost.Value,
-                UnitCost = unitCost,
-                UnitPrice = unitPrice,
+                offlinesaleskey = onlineSalesKey,
+                currencykey = currencyKey,
+                customerkey = customerKey,
+                salesordernumber = salesOrderNumber,
+                salesorderlinenumber = rand.Next(1, 4874),
+                salesquantity = salesQuantity,
+                salesamount = salesAmount.Value,
+                returnquantity = returnQuantity,
+                datekey = dateKey,
+                storekey = storeKey,
+                discountamount = discountAmount,
+                totalcost = totalCost.Value,
+                unitcost = unitCost,
+                unitprice = unitPrice,
                 simple_string_nullable = null,
-                DiscountQuantity = discountQuantity,
-                ProductKey = productKey,
-                PromotionKey = promotionKey.Value,
-                PromotionKeyNullable = promotionKeyNullable.Value,
-                ReturnAmount = returnAmount,
+                discountquantity = discountQuantity,
+                productkey = productKey,
+                promotionkey = promotionKey.Value,
+                promotionkeynullable = promotionKeyNullable.Value,
+                returnamount = returnAmount,
             
             });
         }
     }
     
     public static void FillAndWriteToCsvFactOnlineSales(
-        List<FactOnlineSale> factOnlineSales,
-        List<DimDate> dimDates,
-        List<DimCustomer> dimCustomers,
-        List<DimStore> dimStores,
-        List<DimPromotion> dimPromotions,
-        List<DimPromotionNullableKey> dimPromotionNullables,
-        List<DimProduct> dimProducts,
+        List<factonlinesale> factOnlineSales,
+        List<dimdate> dimDates,
+        List<dimcustomer> dimCustomers,
+        List<dimstore> dimStores,
+        List<dimpromotion> dimPromotions,
+        List<dimpromotionnullablekey> dimPromotionNullables,
+        List<dimproduct> dimProducts,
         int startedCountCustomer,
         string pathToWrite)
     {
@@ -125,24 +125,24 @@ public static partial class Filler
         var dimProductsCount = dimProducts.Count();
         var dimPromotionsCount = dimPromotions.Count();
 
-        var generetedFactOnlineSales = new List<FactOnlineSale>();
+        var generetedFactOnlineSales = new List<factonlinesale>();
         var firstBatch = true;
         
         for (var i = 0; i < diff; i++)
         {
             var onlineSalesKey = onlineSalesKeyMax + i;
 
-            var dateKey = dimDates[rand.Next(0, dimDatesCount)].Datekey;
+            var dateKey = dimDates[rand.Next(0, dimDatesCount)].datekey;
 
-            var storeKey = dimStores[rand.Next(0, dimStoresCount)].StoreKey;
+            var storeKey = dimStores[rand.Next(0, dimStoresCount)].storekey;
 
             var randProduct = dimProducts[rand.Next(0, dimProductsCount)];
-            var productKey = randProduct.ProductKey;
+            var productKey = randProduct.productkey;
 
             var randPromotion = dimPromotions[rand.Next(0, dimPromotionsCount)];
-            var promotionKey = randPromotion.PromotionKey;
+            var promotionKey = randPromotion.promotionkey;
 
-            var promotionKeyNullable = randPromotion.PromotionKey == 1 ? null : promotionKey;
+            var promotionKeyNullable = randPromotion.promotionkey == 1 ? null : promotionKey;
 
             var currencyKey = "1";
 
@@ -150,18 +150,18 @@ public static partial class Filler
                 customerIterator = newPositionOfCustomer;
 
             var randDimcustomer = dimCustomers[customerIterator];
-            var customerKey = randDimcustomer.CustomerKey;
+            var customerKey = randDimcustomer.customerkey;
             customerIterator++;
 
-            var salesOrderNumber = dateKey.ToString().Replace("-", "")[..8] + randDimcustomer.CustomerLabel;
+            var salesOrderNumber = dateKey.ToString().Replace("-", "")[..8] + randDimcustomer.customerlabel;
 
             var SalesOrderLineNumber = rand.Next(1, 4874);
 
-            decimal? totalCost = randProduct.UnitCost;
+            decimal? totalCost = randProduct.unitcost;
 
-            var unitCost = randProduct.UnitCost;
+            var unitCost = randProduct.unitcost;
 
-            var unitPrice = randProduct.UnitPrice;
+            var unitPrice = randProduct.unitprice;
 
 
             var salesQuantity = rand.Next(1, 10);
@@ -176,28 +176,28 @@ public static partial class Filler
 
             var discountAmount = discountQuantity > 0 ? unitPrice * (decimal?)0.10 : 0;
             
-            generetedFactOnlineSales.Add(new FactOnlineSale
+            generetedFactOnlineSales.Add(new factonlinesale
             {
-                OnlineSalesKey = onlineSalesKey,
-                CurrencyKey = currencyKey,
-                CustomerKey = customerKey,
-                SalesOrderNumber = salesOrderNumber,
-                SalesOrderLineNumber = SalesOrderLineNumber,
-                SalesQuantity = salesQuantity,
-                SalesAmount = salesAmount.Value,
-                ReturnQuantity = returnQuantity,
-                DateKey = dateKey,
-                StoreKey = storeKey,
-                DiscountAmount = discountAmount,
-                TotalCost = totalCost.Value,
-                UnitCost = unitCost,
-                UnitPrice = unitPrice,
+                onlinesaleskey = onlineSalesKey,
+                currencykey = currencyKey,
+                customerkey = customerKey,
+                salesordernumber = salesOrderNumber,
+                salesorderlinenumber = SalesOrderLineNumber,
+                salesquantity = salesQuantity,
+                salesamount = salesAmount.Value,
+                returnquantity = returnQuantity,
+                datekey = dateKey,
+                storekey = storeKey,
+                discountamount = discountAmount,
+                totalcost = totalCost.Value,
+                unitcost = unitCost,
+                unitprice = unitPrice,
                 simple_string_nullable = null,
-                DiscountQuantity = discountQuantity,
-                ProductKey = productKey,
-                PromotionKey = promotionKey.Value,
-                PromotionKeyNullable = promotionKeyNullable,
-                ReturnAmount = returnAmount,
+                discountquantity = discountQuantity,
+                productkey = productKey,
+                promotionkey = promotionKey.Value,
+                promotionkeynullable = promotionKeyNullable,
+                returnamount = returnAmount,
             
             });
 
@@ -213,12 +213,12 @@ public static partial class Filler
             CsvUtils.CreateCSV(generetedFactOnlineSales, pathToWrite, firstBatch);
     }
 
-    public static void FillDimPromotion(List<DimPromotion> dimPromotions)
+    public static void FillDimPromotion(List<dimpromotion> dimPromotions)
     {
-        dimPromotions.RemoveAll(x => x.PromotionKey == 1);
+        dimPromotions.RemoveAll(x => x.promotionkey == 1);
     }
 
-    public static void FillDimDate(List<DimDate> dimDates)
+    public static void FillDimDate(List<dimdate> dimDates)
     {
         foreach (var dimDate in dimDates)
         {
@@ -227,13 +227,13 @@ public static partial class Filler
         }
     }
 
-    public static void FillDimCustomer(List<DimCustomer> dimCustomers, string pathToFatString)
+    public static void FillDimCustomer(List<dimcustomer> dimCustomers, string pathToFatString)
     {
         var countRowInCurrent = dimCustomers.Count();
         const int neededRowCount = 5000000;
         var diff = neededRowCount - countRowInCurrent;
 
-        var customerKeyMax = dimCustomers.Select(x => x.CustomerKey).Max() + 1;
+        var customerKeyMax = dimCustomers.Select(x => x.customerkey).Max() + 1;
         
         var random = new Random();
         
@@ -243,33 +243,33 @@ public static partial class Filler
             var rndCust = dimCustomers[toSkip];
 
 
-            var title = rndCust.NameStyle == true ? null : titles[random.Next(titles.Length)];
-            var firstName = rndCust.NameStyle == true ? null : firstNames[random.Next(firstNames.Length)];
-            var middleName = rndCust.NameStyle == true ? null : middleNames[random.Next(middleNames.Length)];
-            var lastName = rndCust.NameStyle == true ? null : lastNames[random.Next(lastNames.Length)];
+            var title = rndCust.namestyle == true ? null : titles[random.Next(titles.Length)];
+            var firstName = rndCust.namestyle == true ? null : firstNames[random.Next(firstNames.Length)];
+            var middleName = rndCust.namestyle == true ? null : middleNames[random.Next(middleNames.Length)];
+            var lastName = rndCust.namestyle == true ? null : lastNames[random.Next(lastNames.Length)];
 
-            var generatedEmail = rndCust.NameStyle == true
+            var generatedEmail = rndCust.namestyle == true
                 ? null
                 : lastName + title + firstName + middleName + random.Next(0, 2014) + "@adventure-works.com";
 
             var companyPrefix = companyPrefixes[random.Next(companyPrefixes.Length)];
             var companySuffix = companySuffixes[random.Next(companySuffixes.Length)];
 
-            var generatedGender = rndCust.NameStyle == true ? null : new[] { "M", "F" }[random.Next(0, 2)];
+            var generatedGender = rndCust.namestyle == true ? null : new[] { "M", "F" }[random.Next(0, 2)];
 
 
-            var generatedCompanyName = rndCust.NameStyle == true ? $"{companyPrefix} {companySuffix}" : null;
+            var generatedCompanyName = rndCust.namestyle == true ? $"{companyPrefix} {companySuffix}" : null;
 
             var generetaedYearlyIncome =
-                rndCust.NameStyle == true ? random.Next(1000000, 50000000) : random.Next(1000, 1000000);
+                rndCust.namestyle == true ? random.Next(1000000, 50000000) : random.Next(1000, 1000000);
 
-            var generetedTotalChld = rndCust.NameStyle == true ? 0 : random.Next(0, 6);
+            var generetedTotalChld = rndCust.namestyle == true ? 0 : random.Next(0, 6);
 
-            var generetedTotalChldInHome = rndCust.NameStyle == true ? 0 : random.Next(0, generetedTotalChld + 1);
+            var generetedTotalChldInHome = rndCust.namestyle == true ? 0 : random.Next(0, generetedTotalChld + 1);
 
-            var generetedEducation = rndCust.NameStyle == true ? null : education[random.Next(education.Length)];
+            var generetedEducation = rndCust.namestyle == true ? null : education[random.Next(education.Length)];
 
-            var generetedOccupation = rndCust.NameStyle == true ? null : occupation[random.Next(occupation.Length)];
+            var generetedOccupation = rndCust.namestyle == true ? null : occupation[random.Next(occupation.Length)];
 
             var generetedHouseOwner = random.Next(0, 2);
 
@@ -284,35 +284,35 @@ public static partial class Filler
 
             var generatedAddress = $"{streetNumber} {streetName}, {city}, {state} {zipCode}";
 
-            var customerType = rndCust.NameStyle == true ? "Company" : "Person";
+            var customerType = rndCust.namestyle == true ? "Company" : "Person";
 
-            var dimCustomerToInsert = new DimCustomer
+            var dimCustomerToInsert = new dimcustomer
             {
-                CustomerKey = customerKeyMax + i,
-                CustomerLabel = rndCust.CustomerLabel + i,
-                Title = title,
-                FirstName = firstName,
-                LastName = lastName,
-                MiddleName = middleName,
-                NameStyle = rndCust.NameStyle,
-                BirthDate = rndCust.BirthDate,
-                MaritalStatus = rndCust.MaritalStatus,
-                Suffix = rndCust.Suffix,
-                Gender = generatedGender,
-                EmailAddress = generatedEmail,
-                YearlyIncome = generetaedYearlyIncome,
-                TotalChildren = (byte)generetedTotalChld,
-                NumberChildrenAtHome = (byte)generetedTotalChldInHome,
-                Education = generetedEducation,
-                Occupation = generetedOccupation,
-                HouseOwnerFlag = generetedHouseOwner.ToString(),
-                NumberCarsOwned = (byte)generetedCarsOwned,
-                AddressLine1 = generatedAddress,
-                AddressLine2 = null,
-                Phone = rndCust.NameStyle == true ? null : GeneratePhoneNumber(random),
-                DateFirstPurchase = null,
-                CustomerType = customerType,
-                CompanyName = generatedCompanyName
+                customerkey = customerKeyMax + i,
+                customerlabel = rndCust.customerlabel + i,
+                title = title,
+                firstname = firstName,
+                lastname = lastName,
+                middlename = middleName,
+                namestyle = rndCust.namestyle,
+                birthdate = rndCust.birthdate,
+                maritalstatus = rndCust.maritalstatus,
+                suffix = rndCust.suffix,
+                gender = generatedGender,
+                emailaddress = generatedEmail,
+                yearlyincome = generetaedYearlyIncome,
+                totalchildren = (byte)generetedTotalChld,
+                numberchildrenathome = (byte)generetedTotalChldInHome,
+                education = generetedEducation,
+                occupation = generetedOccupation,
+                houseownerflag = generetedHouseOwner.ToString(),
+                numbercarsowned = (byte)generetedCarsOwned,
+                addressline1 = generatedAddress,
+                addressline2 = null,
+                phone = rndCust.namestyle == true ? null : GeneratePhoneNumber(random),
+                datefirstpurchase = null,
+                customertype = customerType,
+                companyname = generatedCompanyName
             };
 
             dimCustomers.Add(dimCustomerToInsert);
@@ -322,19 +322,19 @@ public static partial class Filler
 
         for (var i = 0; i < dimCustomers.Count(); i++)
         {
-            dimCustomers[i].Inn = GenerateInn();
-            dimCustomers[i].Fat_string = subjects[i];
+            dimCustomers[i].inn = GenerateInn();
+            dimCustomers[i].fat_string = subjects[i];
         }
         subjects.Clear();
         GC.Collect();
     }
 
-    public static void FillDimProduct(IEnumerable<DimProduct> dimProducts)
+    public static void FillDimProduct(IEnumerable<dimproduct> dimProducts)
     {
         var random = new Random();
 
         var numericBrandName = dimProducts
-            .Select(x => x.BrandName)
+            .Select(x => x.brandname)
             .Distinct()
             .OrderBy(brandName => brandName)
             .Select((brandName, index) => new
@@ -344,7 +344,7 @@ public static partial class Filler
             });
 
         var numericClassName = dimProducts
-            .Select(x => x.ClassName)
+            .Select(x => x.classname)
             .Distinct()
             .OrderBy(className => className)
             .Select((className, index) => new
@@ -355,28 +355,28 @@ public static partial class Filler
 
         foreach (var dimProduct in dimProducts)
         {
-            dimProduct.Brandname_id = numericBrandName.Where(x => x.BrandName == dimProduct.BrandName)
+            dimProduct.brandname_id = numericBrandName.Where(x => x.BrandName == dimProduct.brandname)
                 .Select(x => x.BrandName_Id).First();
-            dimProduct.Brandname_id_nullable = dimProduct.BrandName == "Contoso"
+            dimProduct.brandname_id_nullable = dimProduct.brandname == "Contoso"
                 ? null
-                : numericBrandName.Where(x => x.BrandName == dimProduct.BrandName)
+                : numericBrandName.Where(x => x.BrandName == dimProduct.brandname)
                     .Select(x => x.BrandName_Id).First();
 
 
-            dimProduct.Classname_id = numericClassName.Where(x => x.className == dimProduct.ClassName)
+            dimProduct.classname_id = numericClassName.Where(x => x.className == dimProduct.classname)
                 .Select(x => x.className_Id).First();
-            dimProduct.Classname_id_nullable = dimProduct.ClassName == "Regular"
+            dimProduct.classname_id_nullable = dimProduct.classname == "Regular"
                 ? null
-                : numericClassName.Where(x => x.className == dimProduct.ClassName)
+                : numericClassName.Where(x => x.className == dimProduct.classname)
                     .Select(x => x.className_Id).First();
 
-            dimProduct.Brandname_string_nullable = dimProduct.BrandName == "Contoso" ? null : dimProduct.BrandName;
+            dimProduct.brandname_string_nullable = dimProduct.brandname == "Contoso" ? null : dimProduct.brandname;
 
-            dimProduct.Classname_string_nullable = dimProduct.ClassName == "Regular" ? null : dimProduct.ClassName;
+            dimProduct.classname_string_nullable = dimProduct.classname == "Regular" ? null : dimProduct.classname;
 
-            dimProduct.Status_bool = dimProduct.Status == "On";
+            dimProduct.status_bool = dimProduct.status == "On";
 
-            dimProduct.Status_bool_nullable = dimProduct.Status == "On" ? true : null;
+            dimProduct.status_bool_nullable = dimProduct.status == "On" ? true : null;
 
             //Вероятность 10%
             if (random.Next(1, 11) == 1)
@@ -388,7 +388,7 @@ public static partial class Filler
                 var newValue = options[random.Next(options.Length)];
 
                 // Присваиваем новое значение строке
-                dimProduct.ProductDescription = newValue;
+                dimProduct.productdescription = newValue;
             }
         }
 

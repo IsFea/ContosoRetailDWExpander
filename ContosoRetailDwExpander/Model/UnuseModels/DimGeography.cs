@@ -20,9 +20,9 @@ public class DimGeography
 
     public DateTime? UpdateDate { get; set; }
 
-    public virtual ICollection<DimCustomer> DimCustomers { get; set; } = new List<DimCustomer>();
+    public virtual ICollection<dimcustomer> DimCustomers { get; set; } = new List<dimcustomer>();
 
     public virtual ICollection<DimSalesTerritory> DimSalesTerritories { get; set; } = new List<DimSalesTerritory>();
 
-    public virtual ICollection<DimStore> DimStores { get; set; } = new List<DimStore>();
+    public virtual ICollection<dimstore> DimStores { get; set; } = new List<dimstore>();
 }

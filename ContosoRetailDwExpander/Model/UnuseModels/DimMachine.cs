@@ -42,5 +42,5 @@ public class DimMachine
 
     public virtual ICollection<FactItsla> FactItslas { get; set; } = new List<FactItsla>();
 
-    public virtual DimStore StoreKeyNavigation { get; set; } = null!;
+    public virtual dimstore StoreKeyNavigation { get; set; } = null!;
 }

@@ -18,7 +18,7 @@ public class FactExchangeRate
 
     public DateTime? UpdateDate { get; set; }
 
-    public virtual DimCurrency CurrencyKeyNavigation { get; set; } = null!;
+    public virtual dimcurrency CurrencyKeyNavigation { get; set; } = null!;
 
-    public virtual DimDate DateKeyNavigation { get; set; } = null!;
+    public virtual dimdate DateKeyNavigation { get; set; } = null!;
 }

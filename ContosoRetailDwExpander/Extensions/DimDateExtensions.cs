@@ -6,9 +6,9 @@ namespace ContosoRetailDwExpander.Extensions;
 
 public static class DimDateExtensions
 {
-    public static void ConvertLabelsToRussian(this DimDate dimDate)
+    public static void ConvertLabelsToRussian(this dimdate dimdate)
     {
-        var date = dimDate.Datekey;
+        var date = dimdate.datekey;
         
         var dateTranslation = new Dictionary<string, string>
         {
@@ -45,19 +45,19 @@ public static class DimDateExtensions
         };
 
         // Преобразование в русские метки
-        dimDate.CalendarYearLabelRu = dimDate.CalendarYearLabel.ReplaceWords(wordTranslation);
-        dimDate.CalendarMonthLabelRu = dimDate.CalendarMonthLabel.ReplaceWords(dateTranslation);
-        dimDate.CalendarWeekLabelRu = dimDate.CalendarWeekLabel.ReplaceWords(wordTranslation);
-        dimDate.CalendarDayOfWeekLabelRu = dimDate.CalendarDayOfWeekLabel.ReplaceWords(dateTranslation);
-        dimDate.IsWorkDayRu = dimDate.IsWorkDay.ReplaceWords(wordTranslation);
+        dimdate.calendaryearlabelru = dimdate.calendaryearlabel.ReplaceWords(wordTranslation);
+        dimdate.calendarmonthlabelru = dimdate.calendarmonthlabel.ReplaceWords(dateTranslation);
+        dimdate.calendarweeklabelru = dimdate.calendarweeklabel.ReplaceWords(wordTranslation);
+        dimdate.calendardayofweeklabelru = dimdate.calendardayofweeklabel.ReplaceWords(dateTranslation);
+        dimdate.isworkdayru = dimdate.isworkday.ReplaceWords(wordTranslation);
 
-        dimDate.FiscalYearLabelRu = dimDate.FiscalYearLabel.ReplaceWords(wordTranslation);
-        dimDate.FiscalMonthLabelRu = dimDate.FiscalMonthLabel.ReplaceWords(wordTranslation);
+        dimdate.fiscalyearlabelru = dimdate.fiscalyearlabel.ReplaceWords(wordTranslation);
+        dimdate.fiscalmonthlabelru = dimdate.fiscalmonthlabel.ReplaceWords(wordTranslation);
     }
     
-    public static void CalculateDimDateValues(this DimDate dimDate)
+    public static void CalculateDimDateValues(this dimdate dimdate)
     {
-        var date = dimDate.Datekey;
+        var date = dimdate.datekey;
 
         // Получаем год, месяц, неделю и день недели из DateKey
         var week = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(
@@ -65,11 +65,11 @@ public static class DimDateExtensions
             CalendarWeekRule.FirstDay,
             DayOfWeek.Sunday);
 
-        dimDate.CalendarMonthNumber = date.Month;
-        dimDate.CalendarWeekNumberOfMonth = GetWeekNumber(date);
-        dimDate.CalendarWeekNumberOfYear = week;
-        dimDate.CalendarDayNumber = date.Day;
-        dimDate.CalendarQuarterNumber = TryExtractQuarterNumber(dimDate.CalendarQuarterLabel);
+        dimdate.calendarmonthnumber = date.Month;
+        dimdate.calendarweeknumberofmonth = GetWeekNumber(date);
+        dimdate.calendarweeknumberofyear = week;
+        dimdate.calendardaynumber = date.Day;
+        dimdate.calendarquarternumber = TryExtractQuarterNumber(dimdate.calendarquarterlabel);
     }
 
     private static int? TryExtractQuarterNumber(string inputString)

@@ -18,7 +18,7 @@ public class DimProductSubcategory
 
     public DateTime? UpdateDate { get; set; }
 
-    public virtual ICollection<DimProduct> DimProducts { get; set; } = new List<DimProduct>();
+    public virtual ICollection<dimproduct> DimProducts { get; set; } = new List<dimproduct>();
 
     public virtual DimProductCategory? ProductCategoryKeyNavigation { get; set; }
 }

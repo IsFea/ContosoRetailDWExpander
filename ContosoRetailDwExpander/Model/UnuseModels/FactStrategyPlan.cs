@@ -26,9 +26,9 @@ public class FactStrategyPlan
 
     public virtual DimAccount AccountKeyNavigation { get; set; } = null!;
 
-    public virtual DimCurrency CurrencyKeyNavigation { get; set; } = null!;
+    public virtual dimcurrency CurrencyKeyNavigation { get; set; } = null!;
 
-    public virtual DimDate DatekeyNavigation { get; set; } = null!;
+    public virtual dimdate DatekeyNavigation { get; set; } = null!;
 
     public virtual DimEntity EntityKeyNavigation { get; set; } = null!;
 
